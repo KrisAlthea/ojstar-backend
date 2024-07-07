@@ -2,23 +2,18 @@ package com.ryanverse.ojstar.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ryanverse.ojstar.model.dto.question.QuestionQueryRequest;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.ryanverse.ojstar.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.ryanverse.ojstar.model.dto.questionsubmit.QuestionSubmitQueryRequest;
-import com.ryanverse.ojstar.model.entity.Question;
 import com.ryanverse.ojstar.model.entity.QuestionSubmit;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.ryanverse.ojstar.model.entity.User;
 import com.ryanverse.ojstar.model.vo.QuestionSubmitVO;
-import com.ryanverse.ojstar.model.vo.QuestionVO;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
-* @author Haoran
-* @description 针对表【question_submit(题目提交)】的数据库操作Service
-* @createDate 2024-07-07 00:57:44
-*/
+ * @author Haoran
+ * @description 针对表【question_submit(题目提交)】的数据库操作Service
+ * @createDate 2024-07-07 00:57:44
+ */
 public interface QuestionSubmitService extends IService<QuestionSubmit> {
 	/**
 	 * 题目提交
@@ -27,7 +22,7 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
 	 * @param loginUser
 	 * @return
 	 */
-	long doQuestionSubmit(QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser);
+	long doQuestionSubmit (QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser);
 
 
 	/**
@@ -36,7 +31,7 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
 	 * @param questionSubmitQueryRequest
 	 * @return
 	 */
-	QueryWrapper<QuestionSubmit> getQueryWrapper(QuestionSubmitQueryRequest questionSubmitQueryRequest);
+	QueryWrapper<QuestionSubmit> getQueryWrapper (QuestionSubmitQueryRequest questionSubmitQueryRequest);
 
 
 	/**
@@ -46,7 +41,7 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
 	 * @param loginUser
 	 * @return
 	 */
-	QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit, User loginUser);
+	QuestionSubmitVO getQuestionSubmitVO (QuestionSubmit questionSubmit, User loginUser);
 
 	/**
 	 * 分页获取题目封装
@@ -55,6 +50,6 @@ public interface QuestionSubmitService extends IService<QuestionSubmit> {
 	 * @param loginUser
 	 * @return
 	 */
-	Page<QuestionSubmitVO> getQuestionSubmitVOPage(Page<QuestionSubmit> questionSubmitPage, User loginUser);
+	Page<QuestionSubmitVO> getQuestionSubmitVOPage (Page<QuestionSubmit> questionSubmitPage, User loginUser);
 
 }

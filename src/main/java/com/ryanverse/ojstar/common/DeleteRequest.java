@@ -1,21 +1,21 @@
 package com.ryanverse.ojstar.common;
 
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 删除请求
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
+ * @author Haoran
  */
 @Data
 public class DeleteRequest implements Serializable {
 
-    /**
-     * id
-     */
-    private Long id;
+	/**
+	 * id
+	 */
+	private Long id;
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 }

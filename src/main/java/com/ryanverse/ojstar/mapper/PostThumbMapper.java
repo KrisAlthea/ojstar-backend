@@ -1,13 +1,12 @@
 package com.ryanverse.ojstar.mapper;
 
-import com.ryanverse.ojstar.model.entity.PostThumb;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ryanverse.ojstar.model.entity.PostThumb;
 
 /**
  * 帖子点赞数据库操作
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
+ * @author Haoran
  */
 public interface PostThumbMapper extends BaseMapper<PostThumb> {
 

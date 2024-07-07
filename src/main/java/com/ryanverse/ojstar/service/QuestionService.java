@@ -2,19 +2,18 @@ package com.ryanverse.ojstar.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.ryanverse.ojstar.model.dto.question.QuestionQueryRequest;
 import com.ryanverse.ojstar.model.entity.Question;
-import com.ryanverse.ojstar.model.entity.Question;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.ryanverse.ojstar.model.vo.QuestionVO;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
-* @author Haoran
-* @description 针对表【question(题目)】的数据库操作Service
-* @createDate 2024-07-07 00:56:57
-*/
+ * @author Haoran
+ * @description 针对表【question(题目)】的数据库操作Service
+ * @createDate 2024-07-07 00:56:57
+ */
 public interface QuestionService extends IService<Question> {
 
 	/**
@@ -23,7 +22,7 @@ public interface QuestionService extends IService<Question> {
 	 * @param question
 	 * @param add
 	 */
-	void validQuestion(Question question, boolean add);
+	void validQuestion (Question question, boolean add);
 
 	/**
 	 * 获取查询条件
@@ -31,7 +30,7 @@ public interface QuestionService extends IService<Question> {
 	 * @param questionQueryRequest
 	 * @return
 	 */
-	QueryWrapper<Question> getQueryWrapper(QuestionQueryRequest questionQueryRequest);
+	QueryWrapper<Question> getQueryWrapper (QuestionQueryRequest questionQueryRequest);
 
 
 	/**
@@ -41,7 +40,7 @@ public interface QuestionService extends IService<Question> {
 	 * @param request
 	 * @return
 	 */
-	QuestionVO getQuestionVO(Question question, HttpServletRequest request);
+	QuestionVO getQuestionVO (Question question, HttpServletRequest request);
 
 	/**
 	 * 分页获取题目封装
@@ -50,6 +49,6 @@ public interface QuestionService extends IService<Question> {
 	 * @param request
 	 * @return
 	 */
-	Page<QuestionVO> getQuestionVOPage(Page<Question> questionPage, HttpServletRequest request);
+	Page<QuestionVO> getQuestionVOPage (Page<Question> questionPage, HttpServletRequest request);
 
 }

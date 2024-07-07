@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ryanverse.ojstar.common.ErrorCode;
 import com.ryanverse.ojstar.constant.CommonConstant;
 import com.ryanverse.ojstar.exception.BusinessException;
+import com.ryanverse.ojstar.mapper.QuestionSubmitMapper;
 import com.ryanverse.ojstar.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.ryanverse.ojstar.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import com.ryanverse.ojstar.model.entity.Question;
@@ -17,7 +18,6 @@ import com.ryanverse.ojstar.model.enums.QuestionSubmitStatusEnum;
 import com.ryanverse.ojstar.model.vo.QuestionSubmitVO;
 import com.ryanverse.ojstar.service.QuestionService;
 import com.ryanverse.ojstar.service.QuestionSubmitService;
-import com.ryanverse.ojstar.mapper.QuestionSubmitMapper;
 import com.ryanverse.ojstar.service.UserService;
 import com.ryanverse.ojstar.utils.SqlUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -25,21 +25,18 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
-* @author Haoran
-* @description 针对表【question_submit(题目提交)】的数据库操作Service实现
-* @createDate 2024-07-07 00:57:44
-*/
+ * @author Haoran
+ * @description 针对表【question_submit(题目提交)】的数据库操作Service实现
+ * @createDate 2024-07-07 00:57:44
+ */
 @Service
 public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper, QuestionSubmit>
-    implements QuestionSubmitService{
-	
+		implements QuestionSubmitService {
+
 	@Resource
 	private QuestionService questionService;
 
@@ -54,7 +51,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 	 * @return
 	 */
 	@Override
-	public long doQuestionSubmit(QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser) {
+	public long doQuestionSubmit (QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser) {
 		// 语言是否合法
 		String language = questionSubmitAddRequest.getLanguage();
 		if (QuestionSubmitLanguageEnum.getEnumByValue(language) == null) {
@@ -92,7 +89,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 	 * @return
 	 */
 	@Override
-	public QueryWrapper<QuestionSubmit> getQueryWrapper(QuestionSubmitQueryRequest questionSubmitQueryRequest) {
+	public QueryWrapper<QuestionSubmit> getQueryWrapper (QuestionSubmitQueryRequest questionSubmitQueryRequest) {
 		QueryWrapper<QuestionSubmit> queryWrapper = new QueryWrapper<>();
 		if (questionSubmitQueryRequest == null) {
 			return queryWrapper;
@@ -118,7 +115,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 	}
 
 	@Override
-	public QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit, User loginUser) {
+	public QuestionSubmitVO getQuestionSubmitVO (QuestionSubmit questionSubmit, User loginUser) {
 		QuestionSubmitVO questionSubmitVO = QuestionSubmitVO.objToVo(questionSubmit);
 		// 脱敏, 仅本人和管理员能看见提交的代码
 		long userId = loginUser.getId();
@@ -130,7 +127,7 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 	}
 
 	@Override
-	public Page<QuestionSubmitVO> getQuestionSubmitVOPage(Page<QuestionSubmit> questionSubmitPage, User loginUser) {
+	public Page<QuestionSubmitVO> getQuestionSubmitVOPage (Page<QuestionSubmit> questionSubmitPage, User loginUser) {
 		List<QuestionSubmit> questionSubmitList = questionSubmitPage.getRecords();
 		Page<QuestionSubmitVO> questionSubmitVOPage = new Page<>(questionSubmitPage.getCurrent(), questionSubmitPage.getSize(), questionSubmitPage.getTotal());
 		if (CollUtil.isEmpty(questionSubmitList)) {

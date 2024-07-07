@@ -8,12 +8,13 @@ import com.ryanverse.ojstar.common.ErrorCode;
 import com.ryanverse.ojstar.constant.CommonConstant;
 import com.ryanverse.ojstar.exception.BusinessException;
 import com.ryanverse.ojstar.exception.ThrowUtils;
+import com.ryanverse.ojstar.mapper.QuestionMapper;
 import com.ryanverse.ojstar.model.dto.question.QuestionQueryRequest;
-import com.ryanverse.ojstar.model.entity.*;
+import com.ryanverse.ojstar.model.entity.Question;
+import com.ryanverse.ojstar.model.entity.User;
 import com.ryanverse.ojstar.model.vo.QuestionVO;
 import com.ryanverse.ojstar.model.vo.UserVO;
 import com.ryanverse.ojstar.service.QuestionService;
-import com.ryanverse.ojstar.mapper.QuestionMapper;
 import com.ryanverse.ojstar.service.UserService;
 import com.ryanverse.ojstar.utils.SqlUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -22,24 +23,26 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
-* @author Haoran
-* @description 针对表【question(题目)】的数据库操作Service实现
-* @createDate 2024-07-07 00:56:57
-*/
+ * @author Haoran
+ * @description 针对表【question(题目)】的数据库操作Service实现
+ * @createDate 2024-07-07 00:56:57
+ */
 @Service
 public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
-    implements QuestionService{
+		implements QuestionService {
 
 	@Resource
 	private UserService userService;
 
 
 	@Override
-	public void validQuestion(Question question, boolean add) {
+	public void validQuestion (Question question, boolean add) {
 		if (question == null) {
 			throw new BusinessException(ErrorCode.PARAMS_ERROR);
 		}
@@ -80,7 +83,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 	 * @return
 	 */
 	@Override
-	public QueryWrapper<Question> getQueryWrapper(QuestionQueryRequest questionQueryRequest) {
+	public QueryWrapper<Question> getQueryWrapper (QuestionQueryRequest questionQueryRequest) {
 		QueryWrapper<Question> queryWrapper = new QueryWrapper<>();
 		if (questionQueryRequest == null) {
 			return queryWrapper;
@@ -112,7 +115,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 	}
 
 	@Override
-	public QuestionVO getQuestionVO(Question question, HttpServletRequest request) {
+	public QuestionVO getQuestionVO (Question question, HttpServletRequest request) {
 		QuestionVO questionVO = QuestionVO.objToVo(question);
 		// 1. 关联查询用户信息
 		Long userId = question.getUserId();
@@ -126,7 +129,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 	}
 
 	@Override
-	public Page<QuestionVO> getQuestionVOPage(Page<Question> questionPage, HttpServletRequest request) {
+	public Page<QuestionVO> getQuestionVOPage (Page<Question> questionPage, HttpServletRequest request) {
 		List<Question> questionList = questionPage.getRecords();
 		Page<QuestionVO> questionVOPage = new Page<>(questionPage.getCurrent(), questionPage.getSize(), questionPage.getTotal());
 		if (CollUtil.isEmpty(questionList)) {

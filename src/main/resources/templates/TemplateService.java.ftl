@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * ${dataName}服务
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://www.code-nav.cn">编程导航学习圈</a>
+ * @author Haoran
  */
 public interface ${upperDataKey}Service extends IService<${upperDataKey}> {
 
@@ -32,7 +31,7 @@ public interface ${upperDataKey}Service extends IService<${upperDataKey}> {
      * @return
      */
     QueryWrapper<${upperDataKey}> getQueryWrapper(${upperDataKey}QueryRequest ${dataKey}QueryRequest);
-    
+
     /**
      * 获取${dataName}封装
      *
