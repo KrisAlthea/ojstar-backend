@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ryanverse.ojstar.common.ErrorCode;
 import com.ryanverse.ojstar.constant.CommonConstant;
 import com.ryanverse.ojstar.exception.BusinessException;
+import com.ryanverse.ojstar.judge.JudgeService;
 import com.ryanverse.ojstar.mapper.QuestionSubmitMapper;
 import com.ryanverse.ojstar.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.ryanverse.ojstar.model.dto.questionsubmit.QuestionSubmitQueryRequest;
@@ -22,10 +23,12 @@ import com.ryanverse.ojstar.service.UserService;
 import com.ryanverse.ojstar.utils.SqlUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -43,12 +46,16 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 	@Resource
 	private UserService userService;
 
+	@Resource
+	@Lazy
+	private JudgeService judgeService;
+
 	/**
 	 * 提交题目
 	 *
-	 * @param questionSubmitAddRequest
-	 * @param loginUser
-	 * @return
+	 * @param questionSubmitAddRequest 提交题目请求
+	 * @param loginUser                登录用户
+	 * @return 提交题目ID
 	 */
 	@Override
 	public long doQuestionSubmit (QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser) {
@@ -76,7 +83,10 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 		questionSubmit.setJudgeInfo("{}");
 		boolean save = this.save(questionSubmit);
 		if (save) {
-			return questionSubmit.getId();
+			// 判题
+			Long questionSubmitId = questionSubmit.getId();
+			CompletableFuture.runAsync(() -> judgeService.doJudge(questionSubmitId));
+			return questionSubmitId;
 		} else {
 			throw new BusinessException(ErrorCode.SYSTEM_ERROR);
 		}
