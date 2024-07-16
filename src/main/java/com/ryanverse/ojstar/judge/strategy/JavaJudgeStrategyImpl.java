@@ -8,6 +8,7 @@ import com.ryanverse.ojstar.model.entity.Question;
 import com.ryanverse.ojstar.model.enums.JudgeInfoMessageEnum;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * ClassName: JavaJudgeStrategyImpl
@@ -33,8 +34,8 @@ public class JavaJudgeStrategyImpl implements JudgeStrategy {
 		Question question = judgeContext.getQuestion();
 		List<JudgeCase> judgeCaseList = judgeContext.getJudgeCaseList();
 
-		Long memory = judgeInfo.getMemory();
-		Long time = judgeInfo.getTime();
+		Long memory = Optional.ofNullable(judgeInfo.getMemory()).orElse(0L);
+		Long time =Optional.ofNullable(judgeInfo.getTime()).orElse(0L);
 
 		JudgeInfo judgeInfoResult = new JudgeInfo();
 		judgeInfoResult.setMemory(memory);

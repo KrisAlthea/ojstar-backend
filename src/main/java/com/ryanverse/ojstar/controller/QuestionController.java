@@ -2,6 +2,7 @@ package com.ryanverse.ojstar.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.Gson;
 import com.ryanverse.ojstar.annotation.AuthCheck;
 import com.ryanverse.ojstar.common.BaseResponse;
 import com.ryanverse.ojstar.common.DeleteRequest;
@@ -11,10 +12,15 @@ import com.ryanverse.ojstar.constant.UserConstant;
 import com.ryanverse.ojstar.exception.BusinessException;
 import com.ryanverse.ojstar.exception.ThrowUtils;
 import com.ryanverse.ojstar.model.dto.question.*;
+import com.ryanverse.ojstar.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import com.ryanverse.ojstar.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import com.ryanverse.ojstar.model.entity.Question;
+import com.ryanverse.ojstar.model.entity.QuestionSubmit;
 import com.ryanverse.ojstar.model.entity.User;
+import com.ryanverse.ojstar.model.vo.QuestionSubmitVO;
 import com.ryanverse.ojstar.model.vo.QuestionVO;
 import com.ryanverse.ojstar.service.QuestionService;
+import com.ryanverse.ojstar.service.QuestionSubmitService;
 import com.ryanverse.ojstar.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -39,6 +45,11 @@ public class QuestionController {
 
 	@Resource
 	private UserService userService;
+
+	@Resource
+	private QuestionSubmitService questionSubmitService;
+
+	private static final Gson GSON = new Gson();
 
 	// region 增删改查
 
@@ -281,6 +292,45 @@ public class QuestionController {
 		}
 		boolean result = questionService.updateById(question);
 		return ResultUtils.success(result);
+	}
+
+
+	/**
+	 * 提交题目
+	 *
+	 * @param questionSubmitAddRequest
+	 * @param request
+	 * @return resultNum 提交记录id
+	 */
+	@PostMapping("/submit/do")
+	public BaseResponse<Long> doQuestionSubmit (@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
+	                                            HttpServletRequest request) {
+		if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
+			throw new BusinessException(ErrorCode.PARAMS_ERROR);
+		}
+		// 登录才能提交题目
+		final User loginUser = userService.getLoginUser(request);
+		long questionSubmitId = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
+		return ResultUtils.success(questionSubmitId);
+	}
+
+	/**
+	 * 查询提交记录
+	 *
+	 * @param questionSubmitQueryRequest
+	 * @param request
+	 */
+	@PostMapping("/submit/list/page")
+	public BaseResponse<Page<QuestionSubmitVO>> listQuestionSubmitByPage (@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest,
+	                                                                      HttpServletRequest request) {
+		long current = questionSubmitQueryRequest.getCurrent();
+		long size = questionSubmitQueryRequest.getPageSize();
+		final User loginUser = userService.getLoginUser(request);
+		// 查询原始题目提交分页信息
+		Page<QuestionSubmit> questionSubmitPage = questionSubmitService.page(new Page<>(current, size),
+				questionSubmitService.getQueryWrapper(questionSubmitQueryRequest));
+		// 脱敏
+		return ResultUtils.success(questionSubmitService.getQuestionSubmitVOPage(questionSubmitPage, loginUser));
 	}
 
 }
