@@ -64,7 +64,13 @@ class CodeSandboxTest {
 	@Test
 	void executeCodeByValue () {
 		CodeSandbox codeSandbox = CodeSandboxFactory.getCodeSandbox(codeSandboxType);
-		String code = "System.out.println(\"Hello World!\");";
+		String code = "public class Main {\n" +
+				"\tpublic static void main(String[] args) {\n" +
+				"\t\tint a = Integer.parseInt(args[0]);\n" +
+				"\t\tint b = Integer.parseInt(args[1]);\n" +
+				"\t\tSystem.out.println(\"结果:\" + (a + b));\n" +
+				"\t}\n" +
+				"}";
 		String language = QuestionSubmitLanguageEnum.JAVA.getValue();
 		List<String> inputList = Arrays.asList("1 2", "3 4");
 		ExecuteCodeRequest executeCodeRequest = ExecuteCodeRequest.builder()
@@ -79,7 +85,13 @@ class CodeSandboxTest {
 	void executeCodeByProxy () {
 		CodeSandbox codeSandbox = CodeSandboxFactory.getCodeSandbox(codeSandboxType);
 		codeSandbox = new CodeSandboxProxy(codeSandbox);
-		String code = "System.out.println(\"Hello World!\");";
+		String code = "public class Main {\n" +
+				"\tpublic static void main(String[] args) {\n" +
+				"\t\tint a = Integer.parseInt(args[0]);\n" +
+				"\t\tint b = Integer.parseInt(args[1]);\n" +
+				"\t\tSystem.out.println(\"结果:\" + (a + b));\n" +
+				"\t}\n" +
+				"}";
 		String language = QuestionSubmitLanguageEnum.JAVA.getValue();
 		List<String> inputList = Arrays.asList("1 2", "3 4");
 		ExecuteCodeRequest executeCodeRequest = ExecuteCodeRequest.builder()

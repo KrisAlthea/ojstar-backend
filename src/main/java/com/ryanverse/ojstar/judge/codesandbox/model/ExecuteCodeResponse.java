@@ -1,6 +1,5 @@
 package com.ryanverse.ojstar.judge.codesandbox.model;
 
-import com.ryanverse.ojstar.model.dto.questionsubmit.JudgeInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

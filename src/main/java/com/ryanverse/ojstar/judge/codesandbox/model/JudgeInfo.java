@@ -1,4 +1,4 @@
-package com.ryanverse.ojstar.model.dto.questionsubmit;
+package com.ryanverse.ojstar.judge.codesandbox.model;
 
 import lombok.Data;
 

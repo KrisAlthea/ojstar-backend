@@ -1,7 +1,7 @@
 package com.ryanverse.ojstar.judge.strategy;
 
 import com.ryanverse.ojstar.model.dto.question.JudgeCase;
-import com.ryanverse.ojstar.model.dto.questionsubmit.JudgeInfo;
+import com.ryanverse.ojstar.judge.codesandbox.model.JudgeInfo;
 import com.ryanverse.ojstar.model.entity.Question;
 import com.ryanverse.ojstar.model.entity.QuestionSubmit;
 import lombok.Data;

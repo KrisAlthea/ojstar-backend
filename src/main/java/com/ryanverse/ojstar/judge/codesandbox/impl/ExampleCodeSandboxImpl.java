@@ -3,7 +3,7 @@ package com.ryanverse.ojstar.judge.codesandbox.impl;
 import com.ryanverse.ojstar.judge.codesandbox.CodeSandbox;
 import com.ryanverse.ojstar.judge.codesandbox.model.ExecuteCodeRequest;
 import com.ryanverse.ojstar.judge.codesandbox.model.ExecuteCodeResponse;
-import com.ryanverse.ojstar.model.dto.questionsubmit.JudgeInfo;
+import com.ryanverse.ojstar.judge.codesandbox.model.JudgeInfo;
 import com.ryanverse.ojstar.model.enums.JudgeInfoMessageEnum;
 import com.ryanverse.ojstar.model.enums.QuestionSubmitStatusEnum;
 

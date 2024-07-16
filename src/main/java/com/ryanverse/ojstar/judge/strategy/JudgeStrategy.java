@@ -1,6 +1,6 @@
 package com.ryanverse.ojstar.judge.strategy;
 
-import com.ryanverse.ojstar.model.dto.questionsubmit.JudgeInfo;
+import com.ryanverse.ojstar.judge.codesandbox.model.JudgeInfo;
 
 /**
  * ClassName: JudgeStrategy

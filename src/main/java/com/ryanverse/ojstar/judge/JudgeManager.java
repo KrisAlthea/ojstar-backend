@@ -4,7 +4,7 @@ import com.ryanverse.ojstar.judge.strategy.DefaultJudgeStrategyImpl;
 import com.ryanverse.ojstar.judge.strategy.JavaJudgeStrategyImpl;
 import com.ryanverse.ojstar.judge.strategy.JudgeContext;
 import com.ryanverse.ojstar.judge.strategy.JudgeStrategy;
-import com.ryanverse.ojstar.model.dto.questionsubmit.JudgeInfo;
+import com.ryanverse.ojstar.judge.codesandbox.model.JudgeInfo;
 import com.ryanverse.ojstar.model.entity.QuestionSubmit;
 import org.springframework.stereotype.Service;
 

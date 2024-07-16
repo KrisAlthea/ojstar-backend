@@ -1,7 +1,7 @@
 package com.ryanverse.ojstar.model.vo;
 
 import cn.hutool.json.JSONUtil;
-import com.ryanverse.ojstar.model.dto.questionsubmit.JudgeInfo;
+import com.ryanverse.ojstar.judge.codesandbox.model.JudgeInfo;
 import com.ryanverse.ojstar.model.entity.QuestionSubmit;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
