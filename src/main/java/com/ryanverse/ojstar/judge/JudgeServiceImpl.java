@@ -50,7 +50,7 @@ public class JudgeServiceImpl implements JudgeService {
 	/**
 	 * 判题
 	 *
-	 * @param questionId 题目ID
+	 * @param questionSubmitId 题目ID
 	 * @return QuestionSubmitVO
 	 */
 	@Override

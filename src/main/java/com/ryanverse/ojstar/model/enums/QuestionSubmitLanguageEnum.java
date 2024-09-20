@@ -45,7 +45,7 @@ public enum QuestionSubmitLanguageEnum {
 		if (ObjectUtils.isEmpty(value)) {
 			return null;
 		}
-		for (QuestionSubmitLanguageEnum anEnum : QuestionSubmitLanguageEnum.values()) {
+		for (QuestionSubmitLanguageEnum anEnum : values()) {
 			if (anEnum.value.equals(value)) {
 				return anEnum;
 			}
