@@ -1,6 +1,6 @@
 ### OJ Star
 
-在线访问地址[在这里](ojstar.haoran.icu)
+在线访问地址[在这里](http://ojstar.haoran.icu)
 
 基于 Spring Boot + Spring Cloud 微服务 + Docker（+ Vue 3 + Arco Design）的编程题目在线评测系统。
 
